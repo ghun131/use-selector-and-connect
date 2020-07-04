@@ -1,10 +1,10 @@
 ## React-Redux useSelector + useDispatch hay Connect
 
-Mấy tuần trước có một cậu trong team tớ hỏi: "Tại sao không sử dụng useSelector cho dự án mới?" Nếu các bạn sử dụng React và Redux chắc các bạn sẽ sử dụng một thứ khá phổ biến đi kèm với 2 thư viện này, đó chính là thư viện `react-redux`.
+Mấy tuần trước có một cậu trong team tớ hỏi: "Tại sao không sử dụng useSelector cho dự án mới?" Nếu các bạn sử dụng React và Redux chắc các bạn sẽ dùng thêm một thứ khá phổ biến đi kèm với 2 thư viện này, đó chính là thư viện `react-redux`.
 
-`react-redux` cho phép bạn sử dụng hàm `connect` để lấy các `state` trong `reducer` hoặc sử dụng các **action** trên các components để hiển thị. Cụ thể mục tiêu này đạt được nhờ dùng đến 2 hàm là `mapStateToProps` và `mapDispatchToProps`.
+`react-redux` cho phép bạn dùng hàm `connect` để lấy các `state` trong `reducer` hoặc sử dụng các **action** trên các components để hiển thị. Cụ thể mục tiêu này đạt được nhờ dùng đến 2 hàm là `mapStateToProps` và `mapDispatchToProps`.
 
-Từ phiên bản `react--redux` v7 bạn đã có thể sử dụng `useSelector` và `useDispatch` thay thế cho hàm `connect`. Một lý cậu đồng nghiệp sử dụng 2 hàm này là cú pháp code của bạn trở nên sáng sủa hơn. Và tớ đã viết thử 1 todo app đơn giản để kiểm chứng điều này.
+Từ phiên bản `react-redux` v7 bạn đã có thể sử dụng `useSelector` và `useDispatch` thay thế cho hàm `connect`. Một lý cậu đồng nghiệp sử dụng 2 hàm này là cú pháp code của bạn trở nên sáng sủa hơn. Và tớ đã viết thử 1 todo app đơn giản để kiểm chứng điều này.
 
 Todos.js
 
@@ -155,11 +155,18 @@ function Todo({ id }) {
 export default Todo;
 ```
 
-Có thể thấy rằng số dòng code giảm đi, nhất là khi nếu bạn sử dụng nhiều `state` của reducer hay `action` khiến cho hàm `mapStateToProps` và `mapDispatchToProps` phình to ra, cộng thêm việc _destructure_ các biến trong props để sử dụng ở đầu hàm (như dòng 7) khiến cho số lượng code bạn viết tăng lên tương đối nhiều.
+Có thể thấy rằng số dòng code giảm đi, nhất là khi nếu bạn sử dụng nhiều `state` của reducer hay `action` khiến cho hàm `mapStateToProps` và `mapDispatchToProps` phình to ra, cộng thêm việc _destructure_ các biến trong props để sử dụng ở đầu hàm (như dòng 7 file Todo.js có `connect`) khiến cho số lượng code bạn viết tăng lên tương đối nhiều.
 
 Tuy nhiên `useSelector` có một nhược điểm là khi một component thay đổi, nó khiến cho toàn bộ cây component phải render lại và việc này gây tốn hiệu năng.
-<ảnh gif số lần render bằng useSelector>
-<ảnh gif số lần render bằng connect>
+
+#### Số lần render dùng connect
+
+  <img src="https://res.cloudinary.com/hunghayho131/image/upload/v1593881780/connect.gif" height=300>
+
+#### Số lần rende dùng useSelector
+
+  <img src="https://res.cloudinary.com/hunghayho131/image/upload/v1593881780/useSelector.gif" height=300>
+
 Do đó mà ngay trong document của `react-redux`, `React.memo` được sử dụng để hạn chế số lần render. Todo sẽ trở thành như sau
 
 Todo.js
