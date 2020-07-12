@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { getTodos, addTodo } from "../reducer";
+import { addTodo } from "../reducer";
 import Todo from "./Todo";
 
 function Todos() {
   const [task, setTask] = useState("");
-  const todos = useSelector((state) => getTodos(state));
+  const todos = useSelector((state) => state.todos, shallowEqual);
   const dispatch = useDispatch();
 
   function handleChange(event) {

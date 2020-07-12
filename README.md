@@ -199,4 +199,4 @@ const Todo = React.memo(function ({ id }) {
 export default Todo;
 ```
 
-Việc dùng `React.memo` hạn chế số lần render `useSelector` nhưng rõ ràng là cách làm này khiến `useSelector` phải dựa vào một phương thức khác để không bị mất đi hiệu năng so với `connect`, đây là một điểm trừ. Cho đến thời điểm vấn đề này được team `react-redux` khắc phục, `connect` vẫn sẽ là lựa chọn phổ biến nhất cho mọi anh em sử dụng `react-redux`
+Việc dùng `React.memo` hạn chế số lần render `useSelector` nhưng rõ ràng là cách làm này khiến `useSelector` phải dựa vào một phương thức khác để không bị mất đi hiệu năng so với `connect`, đây là một điểm trừ. Một cách khắc phục khác là thêm hàm `shallowEqual` như param thứ 2 của `useSelector` nhưng không phải lúc nào hàm này cũng chạy (như trong ví dụ hiện tại). Đây là lý do mà `useSelector` hay `useDispatch` chưa được sử dụng phổ biến

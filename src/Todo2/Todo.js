@@ -1,10 +1,10 @@
 import React from "react";
 import { getTodoById, removeTodo } from "../reducer";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import "./style.css";
 
 const Todo = React.memo(function ({ id }) {
-  const todo = useSelector((state) => getTodoById(state, id));
+  const todo = useSelector((state) => getTodoById(state, id), shallowEqual);
   const dispatch = useDispatch();
 
   console.log("render Todo");
